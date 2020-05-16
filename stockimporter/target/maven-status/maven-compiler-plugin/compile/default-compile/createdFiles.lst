@@ -1,0 +1,6 @@
+ro\ecip\proiect\stockimporter\web\StockController.class
+ro\ecip\proiect\stockimporter\config\SwaggerConfig.class
+ro\ecip\proiect\stockimporter\domain\StockService.class
+ro\ecip\proiect\stockimporter\infrastructure\entity\Product.class
+ro\ecip\proiect\stockimporter\StockImporterApplication.class
+ro\ecip\proiect\stockimporter\infrastructure\repository\ProductRepository.class
