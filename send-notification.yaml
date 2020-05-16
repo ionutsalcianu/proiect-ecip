@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: send-notification
+  labels:
+    app: office-space
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: office-space
+    tier: notification
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: send-notification
+  labels:
+    app: office-space
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+        app: office-space
+  template:
+    metadata:
+      labels:
+        app: office-space
+    spec:
+      containers:
+        - image: us.icr.io/ecip/send-notification:latest
+          imagePullPolicy: Always
+          name: send-notification
+          env:
+            - name: GMAIL_SENDER_USER
+              value: emailpentruteste1@gmail.com
+            - name: GMAIL_SENDER_PASSWORD
+              value: parolatest
+            - name: EMAIL_RECEIVER
+              value: ionuts@e-dea.ro
+            - name: OPENWHISK_API_URL_EMAIL
+              value: https://service.eu-de.apiconnect.ibmcloud.com/gws/apigateway/api/313406eb73e814cbffed90acb7ab56df89f5a618aa7324596e3b0ce2b7419d60/v1/email
+          ports:
+            - containerPort: 8080
